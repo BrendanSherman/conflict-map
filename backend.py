@@ -3,14 +3,24 @@
 
 from datetime import date
 from fastapi import FastAPI, Query
+from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import create_engine, func, text
 from sqlalchemy.orm import sessionmaker
 from typing import List, Optional
 
 from db_insert import Base, Event
 
-# Setup API and Connect to postgre db
+# Setup API and CORS middleware (integrate react server)
 app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# Connect API to postgresql DB
 DATABASE_URL = "postgresql://acled_access:eventdata2024@localhost/conflict_db"
 engine = create_engine(DATABASE_URL)
 LocalSession = sessionmaker(autocommit=False, autoflush=False, bind=engine)
