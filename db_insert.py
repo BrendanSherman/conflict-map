@@ -1,3 +1,6 @@
+# Script to read Event API data from generated json file, insert into 'Events' table of postgresql db
+# Author - Brendan Sherman
+
 import json
 from sqlalchemy import create_engine, Column, Integer, String, Float, Date
 from sqlalchemy.orm import sessionmaker, declarative_base
