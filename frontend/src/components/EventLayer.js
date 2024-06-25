@@ -2,34 +2,42 @@ import React, { useEffect, useState } from 'react';
 import { Source, Layer } from 'react-map-gl';
 import axios from 'axios';
 
-function EventLayer() {
-    const [events, setEvents] = useState([]);
+function EventLayer({ onClick }) {
+    const [events, setEvents] = useState(null);
 
     useEffect(() => {
         async function fetchEvents() {
             try {
+                // Fetch raw API data and log for debugging
                 const response = await axios.get('http://localhost:8000/events');
+                console.log("API raw data:", response.data)
+
+                // Convert data into geoJSON format
                 const geojson = {
                     type: 'FeatureCollection',
                     features: response.data.map(event => ({
                         type: 'Feature',
                         geometry: {
                             type: 'Point',
-                            coordinates: [event.longitude, event.latitude]
+                            coordinates: [parseFloat(event.longitude), parseFloat(event.latitude)]
                         },
                         properties: {
-                            id: event.id,
-                            type: event.type
+                            ...event,
+                            longitude: parseFloat(event.longitude),
+                            latitude: parseFloat(event.latitude)
                         }
                     }))
                 };
-                setEvents(geojson)
+                console.log("Processed GeoJSON data: ", geojson)
+                setEvents(geojson);
             } catch (error) {
-                console.error("Failed to fetch events from backend:", error)
+                console.error("Failed to fetch events from backend:", error);
             }
         }
         fetchEvents();
     }, []);
+
+    if (!events) return null 
 
     return (
         <Source id="events" type="geojson" data={events}>
@@ -37,8 +45,20 @@ function EventLayer() {
                 id="event-layer"
                 type="circle"
                 paint={{
-                    'circle-radius': 4,
-                    'circle-color': '#007cbf'
+                    'circle-radius': 10,
+                    'circle-color': [
+                        'match',
+                        ['get', 'type'],
+                        'Violence against civilians', '#FF4136',  // Bright Red
+                        'Explosions/Remote violence', '#FF851B',  // Dark Orange
+                        'Strategic developments', '#2ECC40',      // Lime Green
+                        'Battles', '#B10DC9',                     // Purple
+                        'Protests', '#FFDC00',                    // Gold
+                        'Riots', '#0074D9',                       // Blue
+                        '#85144b'         
+                    ],
+                    'circle-stroke-width': 1,
+                    'circle-stroke-color': 'black'
                 }}
             />
         </Source>

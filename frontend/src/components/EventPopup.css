@@ -1,0 +1,101 @@
+.event-popup {
+    max-width: 300px !important;
+  }
+  
+  .event-popup .mapboxgl-popup-content {
+    padding: 0;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+  }
+  
+  .event-popup-content {
+    background-color: #ffffff;
+  }
+  
+  .event-type {
+    background-color: #2c3e50;
+    color: #ffffff;
+    margin: 0;
+    padding: 12px 36px 12px 16px; /* Increased right padding */
+    font-size: 18px;
+    font-weight: 600;
+    word-wrap: break-word; /* Allow long words to break */
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
+  
+  .event-details {
+    padding: 16px;
+  }
+  
+  .event-details p {
+    margin: 8px 0;
+    font-size: 14px;
+    line-height: 1.4;
+    word-wrap: break-word; /* Allow long words to break */
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
+  
+  .event-notes {
+    background-color: #f8f9fa;
+    padding: 12px 16px;
+    border-top: 1px solid #e9ecef;
+  }
+  
+  .event-notes h4 {
+    margin: 0 0 8px 0;
+    font-size: 16px;
+    color: #2c3e50;
+  }
+  
+  .event-notes p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.4;
+    color: #495057;
+    word-wrap: break-word; /* Allow long words to break */
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
+  
+  .mapboxgl-popup-close-button {
+    font-size: 18px;
+    color: #ffffff;
+    right: 8px;
+    top: 8px;
+    z-index: 1; /* Ensure button is above content */
+    background-color: rgba(0, 0, 0, 0.3); /* Semi-transparent background */
+    border-radius: 50%; /* Make it circular */
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: none;
+  }
+  
+  .mapboxgl-popup-close-button:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  
+  /* Prevent word breaks in all text */
+  .event-popup-content * {
+    word-break: normal;
+  }
+  
+  /* Add ellipsis for overflowing text */
+  .event-type, .event-details p, .event-notes p {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  /* Allow multi-line for event type */
+  .event-type {
+    white-space: normal;
+    max-height: 3.6em; /* Approximately 2 lines of text */
+    overflow: hidden;
+  }

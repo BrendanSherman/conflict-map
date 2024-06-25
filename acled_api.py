@@ -13,7 +13,6 @@ def fetch_acled_data():
     params = {
         'key': api_key,
         'email': api_email,
-        'limit': 2000
     }
     response = requests.get(api_url, params = params)
     data = response.json()

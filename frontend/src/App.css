@@ -14,7 +14,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #282c44;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -25,7 +25,7 @@
 }
 
 .App-link {
-  color: #61dafb;
+  color: #61daff;
 }
 
 @keyframes App-logo-spin {
@@ -35,4 +35,12 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.edited-map-container {
+  background-color: #A0E0FF; 
+}
+
+.edited-map-container .mapboxgl-canvas-container {
+  opacity: 0.8; /* Adjust this value to blend the map with the background */
 }
